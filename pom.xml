@@ -11,6 +11,7 @@
     <name>cloud-store Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+
     <properties>
         <spring.version>4.1.2.RELEASE</spring.version>
         <spring.data.jpa>1.6.0.RELEASE</spring.data.jpa>
