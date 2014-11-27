@@ -6,9 +6,6 @@ package edu.nu.cs.web.controller;
         import org.springframework.ui.ModelMap;
         import org.springframework.web.bind.annotation.PathVariable;
         import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestParam;
-        import org.springframework.web.bind.annotation.RestController;
-        import org.springframework.web.servlet.ModelAndView;
 
         import javax.annotation.Resource;
         import java.util.ArrayList;
@@ -28,6 +25,7 @@ public class UserController {
     private String greeting(@PathVariable(value = "name") String name){
         return "Hello! " + name;
     }
+
     @RequestMapping(value= {"/"})
     public String printHello(ModelMap model) {
         model.addAttribute("name", "Talha !");
