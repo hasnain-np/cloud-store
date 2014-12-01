@@ -1,4 +1,4 @@
-package edu.nu.cs;
+package edu.nu.cs.spring.initializers;
 
 import edu.nu.cs.config.Application;
 import edu.nu.cs.config.WebMvcConfig;

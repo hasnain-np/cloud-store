@@ -1,4 +1,4 @@
-package edu.nu.cs.config;
+package edu.nu.cs.spring.initializers;
 
 /**
  * Created by Hasnain on 11/29/2014.
