@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Hasnain
  * on 11/26/14.
  */
-public class UserVO implements Serializable {
+public class UserVO implements IValueObject {
     private Long userID;
 
     private String userName;

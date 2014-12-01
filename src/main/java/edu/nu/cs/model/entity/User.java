@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User implements IEntityBean {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "user_id")

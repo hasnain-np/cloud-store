@@ -1,9 +1,9 @@
 package edu.nu.cs.security;
 
 import edu.nu.cs.model.entity.User;
-import edu.nu.cs.service.ServiceLocator;
+import edu.nu.cs.service.Util.ServiceLocator;
 import edu.nu.cs.constants.Constants;
-import edu.nu.cs.service.UserService;
+import edu.nu.cs.service.impl.UserService;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
