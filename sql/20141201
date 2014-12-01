@@ -1,4 +1,4 @@
-CREATE TABLE `FILES` (
+CREATE TABLE `FILE` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `description` text NOT NULL,
