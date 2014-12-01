@@ -3,6 +3,7 @@ package edu.nu.cs.security;
 import edu.nu.cs.service.interfaces.IUserService;
 import edu.nu.cs.service.Util.ServiceConstants;
 import edu.nu.cs.service.Util.ServiceLocator;
+import edu.nu.cs.util.UtilityMethods;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +27,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
             UserVO user = new UserVO();
 
             user.setUserName(authentication.getPrincipal().toString());
-            user.setPassword(authentication.getCredentials().toString());
+            user.setPassword(UtilityMethods.getMD5(authentication.getCredentials().toString()));
             user = userService.findByUserNameAndPassword(user);
 
             // if(user!=null && user.getUserId() != null && !user.getUserType().equals(IConstants.User_Type_Blocked))
