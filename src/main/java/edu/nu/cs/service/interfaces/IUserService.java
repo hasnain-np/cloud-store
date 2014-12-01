@@ -1,5 +1,6 @@
-package edu.nu.cs.service;
+package edu.nu.cs.service.interfaces;
 
+import edu.nu.cs.service.interfaces.IService;
 import edu.nu.cs.value.objects.UserVO;
 
 /**

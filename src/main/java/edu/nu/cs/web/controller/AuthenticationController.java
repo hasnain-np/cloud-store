@@ -16,17 +16,20 @@ import java.util.List;
  * Created by Hasnain on 11/26/14.
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/secure")
 public class AuthenticationController {
 
     @Resource
     UserRepository userRepository;
 
-    @RequestMapping
+    @RequestMapping(value = "/login")
     private String login(ModelMap models){
-        models.addAttribute("param", null);
+        return "auth/login";
+    }
 
-        return "login";
+    @RequestMapping(value = "/register")
+    private String registerForm(ModelMap models){
+        return "auth/register";
     }
 
 }

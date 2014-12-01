@@ -35,12 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home").failureUrl("/login?error")
+                .loginPage("/sercure/login")
+                .defaultSuccessUrl("/home").failureUrl("/sercure/login?error")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/sercure/login?logout")
                 .permitAll();
 
         http.csrf().disable();
@@ -55,12 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(customAuthenticationProvider);
     }
 
-    private String getUserQuery() {
+    /*private String getUserQuery() {
         return "SELECT user_name as username, password as password, true FROM UserVO WHERE user_name = ?";
     }
 
     private String getAuthoritiesQuery() {
          return "SELECT username as username, roles as authority FROM CLIENT WHERE username = ?";
-    }
+    }*/
 
 }

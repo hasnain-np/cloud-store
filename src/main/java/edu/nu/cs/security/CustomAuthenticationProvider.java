@@ -1,9 +1,8 @@
 package edu.nu.cs.security;
 
-import edu.nu.cs.model.entity.User;
+import edu.nu.cs.service.interfaces.IUserService;
+import edu.nu.cs.service.Util.ServiceConstants;
 import edu.nu.cs.service.Util.ServiceLocator;
-import edu.nu.cs.constants.Constants;
-import edu.nu.cs.service.impl.UserService;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,13 +21,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
     @Override
     public Authentication authenticate(Authentication authentication) {
         if (authentication.getPrincipal() != null && authentication.getCredentials() != null) {
-            UserService userService = (UserService)ServiceLocator.getService(Constants.USER_SERVICE);
+            IUserService userService = (IUserService)ServiceLocator.getService(ServiceConstants.USER_SERVICE);
 
-            UserVO user_= new UserVO();
-            User user= new User();
-            user_.setUserName(authentication.getPrincipal().toString());
-            user_.setPassword(authentication.getCredentials().toString());
-            user = userService.findByUserNameAndPassword(user_);
+            UserVO user = new UserVO();
+
+            user.setUserName(authentication.getPrincipal().toString());
+            user.setPassword(authentication.getCredentials().toString());
+            user = userService.findByUserNameAndPassword(user);
 
             // if(user!=null && user.getUserId() != null && !user.getUserType().equals(IConstants.User_Type_Blocked))
 
