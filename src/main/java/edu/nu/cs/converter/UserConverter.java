@@ -24,7 +24,7 @@ public class UserConverter implements IConverter{
     }
 
 
-    public IValueObject covertToValueObject(IEntityBean entity){
+    public IValueObject convertToValueObject(IEntityBean entity){
         UserVO vo = null;
 
         if(entity!=null){
@@ -38,7 +38,7 @@ public class UserConverter implements IConverter{
         return vo;
     }
 
-    public IEntityBean covertToEntityBean(IValueObject vo){
+    public IEntityBean convertToEntityBean(IValueObject vo){
         User entity = null;
 
         if(vo != null){

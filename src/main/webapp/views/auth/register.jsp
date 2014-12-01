@@ -7,19 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/login" var="loginUrl"/>
+<c:url value="/secure/submitRegister" var="registerUrl"/>
 
-<form action="${loginUrl}" method="post">
-  <c:if test="${param.error != null}">
-    <p>
-      Invalid username and password.
-    </p>
-  </c:if>
-  <c:if test="${param.logout != null}">
-    <p>
-      You have been logged out.
-    </p>
-  </c:if>
+<form action="${registerUrl}" method="post" commandName="userForm">
   <p>
     <label for="username">Username</label>
     <input type="text" id="username" name="username"/>
@@ -28,8 +18,9 @@
     <label for="password">Password</label>
     <input type="password" id="password" name="password"/>
   </p>
-  <input type="hidden"
-         name="${_csrf.parameterName}"
-         value="${_csrf.token}"/>
-  <button type="submit" class="btn">Log in</button>
+  <p>
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" id="confirm_password" name="confirm_password"/>
+  </p>
+  <button type="submit" class="btn">Register</button>
 </form>

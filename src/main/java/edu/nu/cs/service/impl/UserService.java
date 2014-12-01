@@ -25,6 +25,6 @@ public class UserService implements IUserService {
     public UserVO findByUserNameAndPassword(UserVO userVO){
         User user = userRepository.findByUserNameAndPassword(userVO.getUserName(), userVO.getPassword());
 
-        return (UserVO)UserConverter.getInstance().covertToValueObject(user);
+        return (UserVO)UserConverter.getInstance().convertToValueObject(user);
     }
 }

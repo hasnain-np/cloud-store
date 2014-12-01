@@ -30,17 +30,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/resources/**", "/secure/**").permitAll()
                 .anyRequest().authenticated();
 
         http
                 .formLogin()
-                .loginPage("/sercure/login")
-                .defaultSuccessUrl("/home").failureUrl("/sercure/login?error")
+                .loginPage("/secure/login")
+                .defaultSuccessUrl("/home").failureUrl("/secure/login?error")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/sercure/login?logout")
+                .logoutSuccessUrl("/secure/login?logout")
                 .permitAll();
 
         http.csrf().disable();
