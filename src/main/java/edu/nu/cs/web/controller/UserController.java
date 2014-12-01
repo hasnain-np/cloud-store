@@ -26,9 +26,9 @@ public class UserController {
         return "Hello! " + name;
     }
 
-    @RequestMapping(value= {"/"})
+    @RequestMapping
     public String printHello(ModelMap model) {
-        model.addAttribute("name", "Talha !");
+            model.addAttribute("name", "Talha !");
 
         List<User> users = userRepository.findAll();
 
