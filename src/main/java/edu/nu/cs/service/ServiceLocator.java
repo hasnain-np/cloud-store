@@ -1,6 +1,5 @@
-package edu.nu.cs.config;
+package edu.nu.cs.service;
 
-import edu.nu.cs.service.IService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
