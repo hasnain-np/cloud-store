@@ -1,8 +1,8 @@
 package edu.nu.cs.security;
 
 import edu.nu.cs.service.interfaces.IUserService;
-import edu.nu.cs.service.Util.ServiceConstants;
-import edu.nu.cs.service.Util.ServiceLocator;
+import edu.nu.cs.service.util.ServiceConstants;
+import edu.nu.cs.service.util.ServiceLocator;
 import edu.nu.cs.util.UtilityMethods;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.AuthenticationProvider;

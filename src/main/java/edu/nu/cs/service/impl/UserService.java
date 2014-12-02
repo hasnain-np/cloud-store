@@ -3,7 +3,7 @@ package edu.nu.cs.service.impl;
 import edu.nu.cs.converter.UserConverter;
 import edu.nu.cs.model.entity.User;
 import edu.nu.cs.model.repo.UserRepository;
-import edu.nu.cs.service.Util.ServiceConstants;
+import edu.nu.cs.service.util.ServiceConstants;
 import edu.nu.cs.service.interfaces.IUserService;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.stereotype.Repository;
