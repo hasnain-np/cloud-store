@@ -1,24 +1,16 @@
-package edu.nu.cs.model.entity;
+package edu.nu.cs.value.objects;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by Hasnain
  * on 11/26/14.
  */
-@Entity
-@Table(name = "user")
-public class User implements IEntityBean {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "user_id")
+public class UserVO implements IValueObject {
     private Long userID;
 
-    @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "password")
     private String password;
 
     public Long getUserID() {

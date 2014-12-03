@@ -17,6 +17,7 @@
         <mysql.version>5.1.26</mysql.version>
         <jackson-json.version>2.3.1</jackson-json.version>
         <commons-dbcp.version>1.2.2</commons-dbcp.version>
+        <spring.security.version>3.2.5.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
@@ -111,7 +112,49 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>-->
+
+        <!-- Spring Security start-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency
+                ><dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-taglibs</artifactId>
+        <version>${spring.security.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>spring-aop</artifactId>
+                <groupId>org.springframework</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+        <!-- Spring Security ends-->
+
+        <!-- Sitemesh-->
+
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!-- Sitemesh-->
     </dependencies>
+
+
+
 
     <dependencyManagement>
         <dependencies>
@@ -143,7 +186,7 @@
                 <configuration>
                     <path>/</path>
                     <update>true</update>
-                    <port>8080</port>
+                    <port>80</port>
                 </configuration>
                 <executions>
                     <execution>

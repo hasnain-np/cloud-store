@@ -1,8 +1,10 @@
-package edu.nu.cs;
+package edu.nu.cs.spring.initializers;
 
 import edu.nu.cs.config.Application;
 import edu.nu.cs.config.WebMvcConfig;
+import edu.nu.cs.filters.SiteMeshFilter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -33,9 +35,10 @@ public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherS
         return new String[] {"/"};
     }
 
-    @Override protected Filter[] getServletFilters() {
-        return new Filter[]{
-                new OpenEntityManagerInViewFilter()
-        };
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        return new Filter[]{ new OpenEntityManagerInViewFilter(), characterEncodingFilter, new SiteMeshFilter() };
     }
 }
