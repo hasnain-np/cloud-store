@@ -27,7 +27,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("edu.nu.cs.model.repo")
+@EnableJpaRepositories(basePackages = "edu.nu.cs.model.repo")
 public class PersistenceConfig {
     @Autowired
     private Environment env;
