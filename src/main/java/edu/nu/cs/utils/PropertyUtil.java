@@ -44,6 +44,8 @@ public class PropertyUtil {
                 }
             }
         }
-        return properties.getProperty(key);
+        String prop = properties.getProperty(key);
+
+        return prop !=null ? prop.trim() : prop;
     }
 }
