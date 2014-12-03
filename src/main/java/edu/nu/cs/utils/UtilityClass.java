@@ -1,5 +1,8 @@
 package edu.nu.cs.utils;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
 /**
  * @author Ayaz Ali Qureshi
  * @version 1.0
@@ -22,5 +25,17 @@ public class UtilityClass {
         return fullPath.split(srcDir)[1];
 
     }
+    public static String getMD5(String input){
+        String md5 = null;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md5 = new BigInteger(1, md.digest(input.getBytes())).toString(16);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return md5;
+    }
+
 
 }

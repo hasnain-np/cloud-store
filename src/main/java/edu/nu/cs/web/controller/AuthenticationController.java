@@ -3,7 +3,7 @@ package edu.nu.cs.web.controller;
 import edu.nu.cs.converter.UserConverter;
 import edu.nu.cs.model.entity.User;
 import edu.nu.cs.model.repo.UserRepository;
-import edu.nu.cs.util.UtilityMethods;
+import edu.nu.cs.utils.UtilityClass;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,7 +42,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("userForm")UserVO user) {
-        user.setPassword(UtilityMethods.getMD5(user.getPassword()));
+        user.setPassword(UtilityClass.getMD5(user.getPassword()));
         userRepository.save((User) UserConverter.getInstance().convertToEntityBean(user));
 
 
