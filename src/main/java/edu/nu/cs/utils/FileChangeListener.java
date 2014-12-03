@@ -1,5 +1,6 @@
 package edu.nu.cs.utils;
 
+import edu.nu.cs.constants.Constants;
 import org.apache.commons.vfs2.*;
 import org.apache.commons.vfs2.impl.SynchronizedFileObject;
 
@@ -25,9 +26,9 @@ public class FileChangeListener implements FileListener {
      */
     public FileChangeListener() throws FileSystemException {
         this.fsManager = VFS.getManager();
-        this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Properties.baseDirectory));
-        this.dest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.destinationDirectory));
-        this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.sourceDirectory));
+        this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Constants.BASE_DIRECTORY));
+        this.dest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY));
+        this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.SOURCE_DIRECTORY));
 
     }
 
@@ -57,7 +58,7 @@ public class FileChangeListener implements FileListener {
                 + event.getFile().getName());
 
         String fileName = UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI());
-        SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.destinationDirectory + fileName));
+        SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY + fileName));
         if (newDest.exists()) {
             newDest.delete(Selectors.SELECT_SELF);
         }

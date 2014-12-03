@@ -1,4 +1,4 @@
-package edu.nu.cs.converter;
+package edu.nu.cs.assembler;
 
 import edu.nu.cs.model.entity.IEntityBean;
 import edu.nu.cs.model.entity.User;
@@ -8,15 +8,15 @@ import edu.nu.cs.value.objects.UserVO;
 /**
  * Created by Hasnain on 12/1/2014.
  */
-public class UserConverter implements IConverter{
-    private static UserConverter instance;
-    private UserConverter(){}
+public class UserAssembler implements IAssembler {
+    private static UserAssembler instance;
+    private UserAssembler(){}
 
-    public static UserConverter getInstance(){
+    public static UserAssembler getInstance(){
         if(instance==null){
-            synchronized (UserConverter.class){
+            synchronized (UserAssembler.class){
                 if(instance==null){
-                    instance = new UserConverter();
+                    instance = new UserAssembler();
                 }
             }
         }

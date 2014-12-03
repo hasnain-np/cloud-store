@@ -22,10 +22,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
     @Override
     public Authentication authenticate(Authentication authentication) {
         if (authentication.getPrincipal() != null && authentication.getCredentials() != null) {
-            IUserService userService = (IUserService)ServiceLocator.getService(ServiceConstants.USER_SERVICE);
+            IUserService userService = (IUserService) ServiceLocator.getService(ServiceConstants.USER_SERVICE);
 
             UserVO user = new UserVO();
-
             user.setUserName(authentication.getPrincipal().toString());
             user.setPassword(UtilityClass.getMD5(authentication.getCredentials().toString()));
             user = userService.findByUserNameAndPassword(user);

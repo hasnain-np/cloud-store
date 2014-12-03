@@ -1,6 +1,6 @@
 package edu.nu.cs.web.controller;
 
-import edu.nu.cs.converter.UserConverter;
+import edu.nu.cs.assembler.UserAssembler;
 import edu.nu.cs.model.entity.User;
 import edu.nu.cs.model.repo.UserRepository;
 import edu.nu.cs.utils.UtilityClass;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 
 /**
@@ -43,7 +41,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("userForm")UserVO user) {
         user.setPassword(UtilityClass.getMD5(user.getPassword()));
-        userRepository.save((User) UserConverter.getInstance().convertToEntityBean(user));
+        userRepository.save((User) UserAssembler.getInstance().convertToEntityBean(user));
 
 
         Authentication authentication = new UsernamePasswordAuthenticationToken( user.getUserName(), user.getPassword(), new ArrayList<GrantedAuthority>());
