@@ -1,4 +1,4 @@
-package edu.nu.cs.service.Util;
+package edu.nu.cs.service.util;
 
 import edu.nu.cs.service.interfaces.IService;
 import org.springframework.beans.BeansException;

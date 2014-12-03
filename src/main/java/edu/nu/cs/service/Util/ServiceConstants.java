@@ -1,4 +1,4 @@
-package edu.nu.cs.service.Util;
+package edu.nu.cs.service.util;
 
 /**
  * Created by Hasnain on 11/29/2014.
