@@ -1,9 +1,11 @@
 package edu.nu.cs.web.controller;
 
+        import edu.nu.cs.constants.Constants;
         import edu.nu.cs.utils.FileChangeListener;
         import edu.nu.cs.utils.Properties;
         import edu.nu.cs.vfs.GenericDestinationHandler;
         import edu.nu.cs.vfs.SFTPHandler;
+        import edu.nu.cs.utils.PropertyUtil;
         import org.apache.commons.vfs2.*;
         import org.apache.commons.vfs2.impl.DefaultFileMonitor;
         import org.springframework.stereotype.Controller;
@@ -25,12 +27,12 @@ public class SyncController {
     public String file(ModelMap model) throws FileSystemException, UnsupportedEncodingException, URISyntaxException {
 
         FileSystemManager fsManager = VFS.getManager();
-        FileObject cwd = fsManager.resolveFile(Properties.baseDirectory);
+        FileObject cwd = fsManager.resolveFile(Constants.BASE_DIRECTORY);
 
-        FileObject src = fsManager.resolveFile(cwd, Properties.sourceDirectory);
+        FileObject src = fsManager.resolveFile(cwd, Constants.SOURCE_DIRECTORY);
 
         GenericDestinationHandler.scheme = "sftp";
-
+        
         FileChangeListener fileChangeListener = new FileChangeListener();
         DefaultFileMonitor fm = new DefaultFileMonitor(fileChangeListener);
         fm.setRecursive(true);

@@ -1,5 +1,7 @@
 package edu.nu.cs.utils;
 
+import edu.nu.cs.constants.Constants;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -9,22 +11,16 @@ import java.security.MessageDigest;
  *          <p/>
  *          This class will contain utility functions
  */
-public class UtilityClass {
-
-
-    private static final String srcDir = Properties.sourceDirectory;
-
-    /**
+public class UtilityClass {    /**
      * Method will split file URL on source directory path
      *
      * @param fullPath
      * @return
      */
     public static String getRelPathToFile(String fullPath) {
-
-        return fullPath.split(srcDir)[1];
-
+        return fullPath.split(Constants.SOURCE_DIRECTORY)[1];
     }
+
     public static String getMD5(String input){
         String md5 = null;
 

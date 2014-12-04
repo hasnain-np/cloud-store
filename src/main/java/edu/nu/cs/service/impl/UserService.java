@@ -1,6 +1,6 @@
 package edu.nu.cs.service.impl;
 
-import edu.nu.cs.converter.UserConverter;
+import edu.nu.cs.assembler.UserAssembler;
 import edu.nu.cs.model.entity.User;
 import edu.nu.cs.model.repo.UserRepository;
 import edu.nu.cs.service.util.ServiceConstants;
@@ -25,6 +25,6 @@ public class UserService implements IUserService {
     public UserVO findByUserNameAndPassword(UserVO userVO){
         User user = userRepository.findByUserNameAndPassword(userVO.getUserName(), userVO.getPassword());
 
-        return (UserVO)UserConverter.getInstance().convertToValueObject(user);
+        return (UserVO) UserAssembler.getInstance().convertToValueObject(user);
     }
 }
