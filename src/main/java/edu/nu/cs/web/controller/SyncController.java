@@ -2,7 +2,6 @@ package edu.nu.cs.web.controller;
 
         import edu.nu.cs.constants.Constants;
         import edu.nu.cs.utils.FileChangeListener;
-        import edu.nu.cs.utils.Properties;
         import edu.nu.cs.vfs.GenericDestinationHandler;
         import edu.nu.cs.vfs.SFTPHandler;
         import edu.nu.cs.utils.PropertyUtil;

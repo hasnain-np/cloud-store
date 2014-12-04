@@ -1,7 +1,7 @@
 package edu.nu.cs.utils;
 
-import edu.nu.cs.vfs.GenericDestinationHandler;
 import edu.nu.cs.constants.Constants;
+import edu.nu.cs.vfs.GenericDestinationHandler;
 import org.apache.commons.vfs2.*;
 import org.apache.commons.vfs2.impl.SynchronizedFileObject;
 
@@ -28,11 +28,14 @@ public class FileChangeListener implements FileListener {
      *
      * @throws FileSystemException
      */
-    public FileChangeListener() throws FileSystemException {
+    public FileChangeListener() throws FileSystemException, UnsupportedEncodingException, URISyntaxException {
         this.fsManager = VFS.getManager();
-        this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Properties.baseDirectory));
-        this.dest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.destinationDirectory));
-        this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.sourceDirectory));
+        this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Constants.BASE_DIRECTORY));
+
+        GenericDestinationHandler destHand = new GenericDestinationHandler();
+        this.dest = new SynchronizedFileObject(destHand.getDestinationObject(fsManager));
+
+        this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.SOURCE_DIRECTORY));
 
     }
 
@@ -48,6 +51,7 @@ public class FileChangeListener implements FileListener {
         String fileName = UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI());
         System.out.println("file created : " + UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI()));
         dest.copyFrom(src, Selectors.SELECT_ALL);
+
     }
 
     /**
@@ -62,7 +66,7 @@ public class FileChangeListener implements FileListener {
                 + event.getFile().getName());
 
         String fileName = UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI());
-        SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.destinationDirectory + fileName));
+        SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY + fileName));
         if (newDest.exists()) {
             newDest.delete(Selectors.SELECT_SELF);
         }
