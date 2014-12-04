@@ -1,7 +1,11 @@
 package edu.nu.cs.utils;
 
+import edu.nu.cs.vfs.GenericDestinationHandler;
 import org.apache.commons.vfs2.*;
 import org.apache.commons.vfs2.impl.SynchronizedFileObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 
 /**
  * @author Ayaz Ali Qureshi
@@ -23,10 +27,13 @@ public class FileChangeListener implements FileListener {
      *
      * @throws FileSystemException
      */
-    public FileChangeListener() throws FileSystemException {
+    public FileChangeListener() throws FileSystemException, UnsupportedEncodingException, URISyntaxException {
         this.fsManager = VFS.getManager();
         this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Properties.baseDirectory));
-        this.dest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.destinationDirectory));
+
+        GenericDestinationHandler destHand = new GenericDestinationHandler();
+        this.dest = new SynchronizedFileObject(destHand.getDestinationObject(fsManager));
+
         this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Properties.sourceDirectory));
 
     }
@@ -43,6 +50,7 @@ public class FileChangeListener implements FileListener {
         String fileName = UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI());
         System.out.println("file created : " + UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI()));
         dest.copyFrom(src, Selectors.SELECT_ALL);
+
     }
 
     /**
