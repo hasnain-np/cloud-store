@@ -1,8 +1,7 @@
 package edu.nu.cs.web.controller;
 
-import edu.nu.cs.assembler.UserAssembler;
-import edu.nu.cs.model.entity.User;
-import edu.nu.cs.model.repo.UserRepository;
+import edu.nu.cs.security.SpringSecurityUtil;
+import edu.nu.cs.service.interfaces.IUserService;
 import edu.nu.cs.utils.UtilityClass;
 import edu.nu.cs.value.objects.UserVO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 /**
@@ -26,22 +26,34 @@ import java.util.ArrayList;
 public class AuthenticationController {
 
     @Resource
-    UserRepository userRepository;
+    IUserService userService;
+
+    @Resource
+    SpringSecurityUtil springSecurityUtil;
 
     @RequestMapping(value = "/login")
     private String login(ModelMap models){
+        if(springSecurityUtil.isAuthenticated()){
+            return "redirect:../home";
+        }
         return "auth/login";
     }
 
     @RequestMapping(value = "/register")
     private String registerForm(ModelMap models){
+        if(springSecurityUtil.isAuthenticated()){
+            return "redirect:../home";
+        }
         return "auth/register";
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("userForm")UserVO user) {
+    public String addUser(@ModelAttribute("userForm") @Valid UserVO user) {
+        if(springSecurityUtil.isAuthenticated()){
+            return "redirect:../home";
+        }
         user.setPassword(UtilityClass.getMD5(user.getPassword()));
-        userRepository.save((User) UserAssembler.getInstance().convertToEntityBean(user));
+        userService.save(user);
 
 
         Authentication authentication = new UsernamePasswordAuthenticationToken( user.getUserName(), user.getPassword(), new ArrayList<GrantedAuthority>());

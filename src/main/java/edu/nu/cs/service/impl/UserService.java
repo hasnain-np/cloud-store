@@ -27,4 +27,12 @@ public class UserService implements IUserService {
 
         return (UserVO) UserAssembler.getInstance().convertToValueObject(user);
     }
+
+    public UserVO save(UserVO user){
+        User entity = (User) UserAssembler.getInstance().convertToEntityBean(user);
+        entity = userRepository.save(entity);
+
+        return (UserVO) UserAssembler.getInstance().convertToValueObject(entity);
+    }
+
 }
