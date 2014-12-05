@@ -5,6 +5,7 @@ package edu.nu.cs.service.util;
  */
 public class ServiceConstants {
     public final static String USER_SERVICE = "userService";
+    public final static String SPRING_SECURITY_UTIL = "springSecurityUtil";
 
 
 //    public final static String
