@@ -198,7 +198,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>cloud-store</finalName>
+        <finalName>cloud-store-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
