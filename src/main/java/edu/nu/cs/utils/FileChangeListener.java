@@ -22,6 +22,7 @@ public class FileChangeListener implements FileListener {
     private SynchronizedFileObject cwd;
     private SynchronizedFileObject dest;
     private SynchronizedFileObject src;
+    private GenericDestinationHandler destHand;
 
     /**
      * Initialize all variables
@@ -32,9 +33,9 @@ public class FileChangeListener implements FileListener {
         this.fsManager = VFS.getManager();
         this.cwd = new SynchronizedFileObject(fsManager.resolveFile(Constants.BASE_DIRECTORY));
 
-        GenericDestinationHandler destHand = new GenericDestinationHandler();
-        this.dest = new SynchronizedFileObject(destHand.getDestinationObject(fsManager));
-
+        this.destHand = new GenericDestinationHandler();
+        /* Fetch destination object from generic handler cause it will contain specific implementations */
+        this.dest = new SynchronizedFileObject(destHand.getDestinationObject(fsManager, null));
         this.src = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.SOURCE_DIRECTORY));
 
     }
@@ -66,9 +67,11 @@ public class FileChangeListener implements FileListener {
                 + event.getFile().getName());
 
         String fileName = UtilityClass.getRelPathToFile(event.getFile().getName().getFriendlyURI());
-        SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY + fileName));
+        //SynchronizedFileObject newDest = new SynchronizedFileObject(fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY + fileName));
+        SynchronizedFileObject newDest = new SynchronizedFileObject(destHand.getDestinationObject(fsManager, fileName));
+
         if (newDest.exists()) {
-            newDest.delete(Selectors.SELECT_SELF);
+            newDest.delete(Selectors.SELECT_SELF_AND_CHILDREN);
         }
 
     }

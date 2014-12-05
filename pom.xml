@@ -118,6 +118,24 @@
             <version>1.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.samba.jcifs</groupId>
+            <artifactId>jcifs</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2-sandbox</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.4-beta1</version>
+        </dependency>
+
         <!--<dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -142,17 +160,18 @@
                 </exclusion>
             </exclusions>
         </dependency
-                ><dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-taglibs</artifactId>
-        <version>${spring.security.version}</version>
-        <exclusions>
-            <exclusion>
-                <artifactId>spring-aop</artifactId>
-                <groupId>org.springframework</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+                >
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- Spring Security ends-->
 
         <!-- Sitemesh-->
@@ -164,8 +183,6 @@
         </dependency>
         <!-- Sitemesh-->
     </dependencies>
-
-
 
 
     <dependencyManagement>
@@ -216,7 +233,9 @@
         <repository>
             <id>io.spring.repo.maven.release</id>
             <url>http://repo.spring.io/release/</url>
-            <snapshots><enabled>false</enabled></snapshots>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>maven2 org</id>
@@ -226,5 +245,10 @@
             <id>spring-milestones</id>
             <url>http://repo.springsource.org/libs-milestone/</url>
         </repository>
+        <repository>
+            <id>mvn-nexus</id>
+            <url>https://maven-us.nuxeo.org/nexus/content/</url>
+        </repository>
+
     </repositories>
 </project>

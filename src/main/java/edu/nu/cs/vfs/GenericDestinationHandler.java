@@ -1,6 +1,6 @@
 package edu.nu.cs.vfs;
 
-import edu.nu.cs.utils.Properties;
+import edu.nu.cs.constants.Constants;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemManager;
@@ -10,25 +10,34 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 
 /**
- * Created by Ayaz Ali Qureshi on 12/3/2014.
+ * @author Ayaz Ali Qureshi
+ *         <p/>
+ *         Generic Destination Handler, handle all schecme selection in this class
  */
 public class GenericDestinationHandler {
 
     public static String scheme = null;
 
+    /**
+     * Prepare a FileObject based on desired scheme
+     *
+     * @param fsManager
+     * @param fileName
+     * @return
+     * @throws FileSystemException
+     * @throws UnsupportedEncodingException
+     * @throws URISyntaxException
+     */
+    public org.apache.commons.vfs2.FileObject getDestinationObject(FileSystemManager fsManager, String fileName) throws FileSystemException, UnsupportedEncodingException, URISyntaxException {
 
-    public org.apache.commons.vfs2.FileObject getDestinationObject(FileSystemManager fsManager) throws FileSystemException, UnsupportedEncodingException, URISyntaxException {
+        SynchronizedFileObject cwd = new SynchronizedFileObject(fsManager.resolveFile(Constants.BASE_DIRECTORY));
 
-        SynchronizedFileObject cwd = new SynchronizedFileObject(fsManager.resolveFile(Properties.baseDirectory));
-
-        if (this.scheme.equals("sftp")) {
-
+        /* If scheme is SFTP */
+        if (this.scheme.equals(Constants.SCHEME_SFTP)) {
             SFTPHandler sftpHandler = new SFTPHandler();
-
-            return fsManager.resolveFile(sftpHandler.getFTPURL(), sftpHandler.getOptions());
+            return fsManager.resolveFile(sftpHandler.getFTPURL(fileName), sftpHandler.getOptions());
         } else {
-
-            return fsManager.resolveFile(cwd, Properties.destinationDirectory);
+            return fsManager.resolveFile(cwd, Constants.DESTINATION_DIRECTORY);
         }
 
     }
