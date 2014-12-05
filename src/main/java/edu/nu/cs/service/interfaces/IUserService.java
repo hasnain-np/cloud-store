@@ -8,4 +8,6 @@ import edu.nu.cs.value.objects.UserVO;
  */
 public interface IUserService extends IService {
     public UserVO findByUserNameAndPassword(UserVO userVO);
+    public UserVO save(UserVO user);
+    
 }
