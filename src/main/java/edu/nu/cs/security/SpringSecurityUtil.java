@@ -17,6 +17,14 @@ public class SpringSecurityUtil {
     public boolean isAuthenticated(){
         return SecurityContextHolder.getContext().getAuthentication() != null &&
                 SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
-                !ANONYMOUS_USER.equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+                !ANONYMOUS_USER.equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
+    }
+
+    public String getLoginUserName(){
+        if(isAuthenticated()){
+            return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        }
+
+        return null;
     }
 }

@@ -32,6 +32,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
             // if(user!=null && user.getUserId() != null && !user.getUserType().equals(IConstants.User_Type_Blocked))
 
             if (user != null && user.getUserID() != null) {
+                UtilityClass.verifyUserDirectory(authentication.getName());
+
                 return new UsernamePasswordAuthenticationToken(
                         authentication.getName(),
                         authentication.getCredentials(), new ArrayList<GrantedAuthority>());

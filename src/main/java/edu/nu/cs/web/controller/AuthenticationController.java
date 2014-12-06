@@ -59,6 +59,8 @@ public class AuthenticationController {
         Authentication authentication = new UsernamePasswordAuthenticationToken( user.getUserName(), user.getPassword(), new ArrayList<GrantedAuthority>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        UtilityClass.verifyUserDirectory(user.getUserName());
+
         return "redirect:../home";
     }
 

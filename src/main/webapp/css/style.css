@@ -1,0 +1,84 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    width: 100%;
+}
+
+#listingContainer{
+    width: 50%;
+    word-break: break-all;
+    background-color: #F8F8F8;
+    overflow-y: auto;
+    height: 400px;
+    font-size: 15px;
+    border: 1px solid gray;
+}
+#listingContainer div {
+    padding: 10px 00px 10px 10px;
+}
+
+.list{
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+.list img{
+    width: 20px;
+    vertical-align: text-top;
+    padding-right: 10px;
+}
+
+.listActive{
+    color:white;
+    background-color: #3389C1;
+    border-top: 1px solid #1F5274;
+    border-bottom: 1px solid #1F5274;
+}
+
+.folderList{
+
+}
+.folderList img{
+}
+.fileList{
+
+}
+.fileList img{
+}
+
+
+button{
+    text-decoration: none;
+    border-radius: 2px;
+    border: 0 rgba(0,0,0,0);
+    font-size: 100%;
+    padding: .5em 1em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btnsContainer{
+    width:50%;
+}
+
+.greenBtn{
+    background: rgb(28, 184, 65);
+    color: white;
+}
+#createDirBtn{
+
+}
+#downBtn{
+
+}
+#selFileBtn{
+
+}
+#startUpBtn{
+    display:none;
+}
+
+.loadingGif{
+    width: 25px;
+    display: none;
+    vertical-align: text-top;
+    padding-right: 30px;
+}
