@@ -14,18 +14,23 @@
 
   <div id="listingContainer">
     <c:forEach var="folderName" items="${folders}">
-      <div class="list folderList"><img src="../images/folder.png"/><c:out value="${folderName}" /> </div>
+      <div class="list folderList" id="${folderName}" ondblclick="openFolder('${folderName}');">
+        <img src="../images/folder.png"/><c:out value="${folderName}" />
+      </div>
     </c:forEach>
 
     <c:forEach var="fileName" items="${files}">
-      <div class="list fileList"><img src="../images/file.png"/><c:out value="${fileName}" /> </div>
+      <div class="list fileList"  ondblclick="downloadFile('${fileName}');">
+        <img src="../images/file.png"/><c:out value="${fileName}" />
+      </div>
     </c:forEach>
   </div>
 
   <br/>
   <div class="btnsContainer">
-    <button class="greenBtn">Create Folder</button>
-    <button class="greenBtn">Download File</button>
+    <button class="greenBtn" onclick="showFolderForm();" id="createDirBtn">Create Folder</button>
+
+    <%--<button class="greenBtn">Download File</button>--%>
     <button class="greenBtn" id="selFileBtn" onclick="selectFile();">Upload File</button>
     <button class="greenBtn" id="startUpBtn" onclick="uploadFile();">Start Uploading</button>
 
@@ -35,6 +40,12 @@
       <div  style='height: 0px;width:0px; overflow:hidden;'><input id="upFile" type="file" name="file" /></div>
       <form:errors path="file" cssStyle="color: #ff0000;" />
     </form:form>
+    <br/><br/>
+    <span id="createFolderSpan">
+      Folder Name: <input id="folderName" type="text" name="folderName" />
+      <button class="greenBtn" onclick="createFolder();" id="saveDirBtn">Save Folder</button>
+    </span>
+    <input type="hidden" id="pathStr" value=""/>
   </div>
 
 <%--

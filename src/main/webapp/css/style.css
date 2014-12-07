@@ -82,3 +82,16 @@ button{
     vertical-align: text-top;
     padding-right: 30px;
 }
+
+#createFolderSpan{
+    display:none;
+}
+#header{
+    height: 70px;
+    border-bottom: 2px solid #e0e0e0;
+}
+#loginInfo{
+    right: 20px;
+    position: absolute;
+    top: 25px;
+}

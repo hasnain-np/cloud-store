@@ -12,7 +12,7 @@
 <body>
     <jsp:include page="/views/templates/header.jsp"></jsp:include>
 
-    <br/><br/>
+    <br/>
 
     <sitemesh:write property='body'/>
 

@@ -12,9 +12,21 @@
 
 
 <c:forEach var="folderName" items="${folders}">
-  <div class="list folderList"><img src="../images/folder.png"/><c:out value="${folderName}" /> </div>
+  <div class="list folderList" id="${folderName}" ondblclick="openFolder('${folderName}');">
+    <img src="../images/folder.png"/><c:out value="${folderName}" />
+  </div>
 </c:forEach>
 
 <c:forEach var="fileName" items="${files}">
-  <div class="list fileList"><img src="../images/file.png"/><c:out value="${fileName}" /> </div>
+  <div class="list fileList"  ondblclick="downloadFile('${fileName}');">
+    <img src="../images/file.png"/><c:out value="${fileName}" />
+  </div>
 </c:forEach>
+
+<script>
+  $("#pathStr").val('${pathStr}');
+
+  $('.list').click(function() {
+    $(this).addClass('listActive').siblings().removeClass('listActive');
+  });
+</script>

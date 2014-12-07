@@ -42,12 +42,12 @@ public class UtilityClass {    /**
 
 
     public static String getBaseDirectory(){
-        return Constants.BASE_DIRECTORY + "\\" + Constants.SOURCE_DIRECTORY;
+        return Constants.BASE_DIRECTORY + "/" + Constants.SOURCE_DIRECTORY;
     }
 
 
     public static void verifyUserDirectory(String userName) {
-        Path dir = Paths.get(getBaseDirectory() + "\\" + userName);
+        Path dir = Paths.get(getBaseDirectory() + "/" + userName);
 
         if(!Files.exists(dir)) {
             try {
