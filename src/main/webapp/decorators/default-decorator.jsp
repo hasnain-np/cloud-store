@@ -10,14 +10,17 @@
     <script type="text/javascript" src="../scripts/myScript.js"></script>
 </head>
 <body>
-    <jsp:include page="/views/templates/header.jsp"></jsp:include>
+    <div style="width: 99%;margin-left: 5px">
+        <jsp:include page="/views/templates/header.jsp"></jsp:include>
 
-    <br/>
+        <br/>
 
-    <sitemesh:write property='body'/>
 
-    <br/><br/><br/>
+        <sitemesh:write property='body'/>
 
-    <jsp:include page="/views/templates/footer.jsp"></jsp:include>
+        <br/><br/><br/>
+
+        <jsp:include page="/views/templates/footer.jsp"></jsp:include>
+    </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     width: 100%;
+    margin: 0px;
 }
 
 #listingContainer{
@@ -56,7 +57,7 @@ button{
 }
 
 .btnsContainer{
-    width:50%;
+    /*width:50%;*/
 }
 
 .greenBtn{
@@ -87,8 +88,19 @@ button{
     display:none;
 }
 #header{
+    width: 100%;
     height: 70px;
     border-bottom: 2px solid #e0e0e0;
+    position: fixed;
+    background-color: #F8F8F8;
+}
+
+#headerInfo{
+    font-size: 25px;
+    position: absolute;
+    top: 18px;
+    font-weight: bold;
+    color:#808080;
 }
 #loginInfo{
     right: 20px;

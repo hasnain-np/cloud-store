@@ -18,4 +18,4 @@
             ${pageContext.request.userPrincipal.name}: <a href="${logoutUrl}">Logout</a>
         </span>
     </sec:authorize>
-</div>
+</div><br/><br/>
