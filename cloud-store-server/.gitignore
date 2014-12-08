@@ -1,2 +1,14 @@
+#Idea Specific Directories
+
 .idea
-cloud-store.iml
+*.iml
+
+
+/.classpath
+/.project
+.settings/
+target/
+/log.roo
+*.log
+
+/bin/

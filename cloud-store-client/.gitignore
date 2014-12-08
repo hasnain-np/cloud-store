@@ -1,3 +1,9 @@
+#Idea Specific Directories
+
+.idea
+*.iml
+
+
 /.classpath
 /.project
 .settings/
