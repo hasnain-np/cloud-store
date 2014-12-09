@@ -13,17 +13,7 @@
   <p>Files and folders: </p>
 
   <div id="listingContainer">
-    <c:forEach var="folderName" items="${folders}">
-      <div class="list folderList" id="${folderName}" ondblclick="openFolder('${folderName}');">
-        <img src="../images/folder.png"/><c:out value="${folderName}" />
-      </div>
-    </c:forEach>
-
-    <c:forEach var="fileName" items="${files}">
-      <div class="list fileList"  ondblclick="downloadFile('${fileName}');">
-        <img src="../images/file.png"/><c:out value="${fileName}" />
-      </div>
-    </c:forEach>
+      <jsp:include page="filesList.jsp"/>
   </div>
 
   <br/>
@@ -33,8 +23,9 @@
     <%--<button class="greenBtn">Download File</button>--%>
     <button class="greenBtn" id="selFileBtn" onclick="selectFile();">Upload File</button>
     <button class="greenBtn" id="startUpBtn" onclick="uploadFile();">Start Uploading</button>
+    <button class="greenBtn" id="deleteBtn" onclick="deleteFile();">Delete</button>
 
-    <img src="../images/loading.gif" class="loadingGif"/>
+    <img src="../images/loading.gif" id="loadingGif"/>
 
     <form:form method="POST" commandName="file" action="ajax/file" id ="fileUpForm" enctype="multipart/form-data">
       <div  style='height: 0px;width:0px; overflow:hidden;'><input id="upFile" type="file" name="file" /></div>
@@ -46,6 +37,8 @@
       <button class="greenBtn" onclick="createFolder();" id="saveDirBtn">Save Folder</button>
     </span>
     <input type="hidden" id="pathStr" value=""/>
+
+    <input type="hidden" id="selectedRowName" value=""/>
   </div>
 
 <%--

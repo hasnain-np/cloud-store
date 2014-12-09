@@ -77,7 +77,7 @@ button{
     display:none;
 }
 
-.loadingGif{
+#loadingGif{
     width: 25px;
     display: none;
     vertical-align: text-top;

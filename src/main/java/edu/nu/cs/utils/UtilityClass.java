@@ -58,6 +58,15 @@ public class UtilityClass {    /**
         return Constants.BASE_DIRECTORY + "/" + Constants.DESTINATION_DIRECTORY;
     }
 
+    /**
+     *
+     * @param userName
+     * @return logged in user's directory
+     */
+    public static String getUserDirectory(String userName){
+        return Constants.BASE_DIRECTORY + "/" + Constants.DESTINATION_DIRECTORY + "/" + userName;
+    }
+
     public static boolean isAjaxRequest(HttpServletRequest request) {
         return "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
     }

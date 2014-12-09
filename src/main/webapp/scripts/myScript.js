@@ -2,6 +2,7 @@
  * Created by Hasnain on 12/7/2014.
  */
 
+var rowDiv=null;
 $(function() {
     $('.list').click(function() {
         $(this).addClass('listActive').siblings().removeClass('listActive');
@@ -96,6 +97,7 @@ function openFolder(_folderName){
     $("#loadingGif").show();
 
     _path = ($("#pathStr").val().length>0 ? ($("#pathStr").val()+"/") : $("#pathStr").val()) + _folderName;
+    $("#selectedRowName").val(_folderName);
 
     $.ajax({
         type: "POST",
@@ -113,8 +115,46 @@ function openFolder(_folderName){
 
 function downloadFile(_fileName){
     $("#loadingGif").show();
+    $("#selectedRowName").val(_fileName);
 
     _path = ($("#pathStr").val().length>0 ? ($("#pathStr").val()+"/") : $("#pathStr").val());
 
     window.location.href = "downloadFile?path=" + _path + "&fileName=" + _fileName;
+    $("#loadingGif").hide();
+}
+
+
+function selectRow(rowVal, rowObj){
+    rowDiv = rowObj;
+    $("#selectedRowName").val(rowVal);
+}
+
+function deleteFile(){
+    if($("#selectedRowName").val().length==0){
+        return false;
+    }
+    _name= $("#selectedRowName").val();
+    _pathStr= $("#pathStr").val();
+    $("#loadingGif").show();
+
+    $.ajax({
+        type: "POST",
+        url: "ajax/delete",
+        data: { pathStr: _pathStr, name: _name},
+        success: function(resp){
+            if(resp.statusCode==0){
+                alert(resp.statusText);
+            }else{
+                //delete succuessful
+                rowDiv.parentNode.removeChild(rowDiv);
+            }
+            $("#loadingGif").hide();
+            $("#startUpBtn").hide();
+            $("#selFileBtn").show();
+            //alert("Success!");
+        },error: function(resp){
+            alert("Error! Directory is not empty!");
+        }
+        //dataType: dataType
+    });
 }

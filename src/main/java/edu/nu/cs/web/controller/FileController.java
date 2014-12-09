@@ -4,19 +4,17 @@ import edu.nu.cs.constants.Constants;
 import edu.nu.cs.security.SpringSecurityUtil;
 import edu.nu.cs.utils.FileCopyUtil;
 import edu.nu.cs.utils.UtilityClass;
+import edu.nu.cs.value.objects.StatusObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class FileController {
     @RequestMapping(value="file", method = RequestMethod.POST)
     public String uploadFile(Model model, MultipartFile file, String path) {
 
-        String srcDir = UtilityClass.getBaseDirectory() + "/" + springSecurityUtil.getLoginUserName()
+        String srcDir = UtilityClass.getUserDirectory(springSecurityUtil.getLoginUserName())
                 + "/" + path + "/" + file.getOriginalFilename();
 
         FileCopyUtil.copyFile(file, new java.io.File(srcDir));
@@ -46,7 +44,7 @@ public class FileController {
         List<String> files = new ArrayList<String>();
         List<String> folders = new ArrayList<String>();
 
-        UtilityClass.loadFilesAndFolders(files, folders, UtilityClass.getBaseDirectory() + "/" + springSecurityUtil.getLoginUserName() + "/" + path);
+        UtilityClass.loadFilesAndFolders(files, folders, UtilityClass.getUserDirectory(springSecurityUtil.getLoginUserName()) + "/" + path);
 
         model.addAttribute("folders", folders);
         model.addAttribute("files", files);
@@ -59,8 +57,8 @@ public class FileController {
 
     @RequestMapping(value="createFolder", method = RequestMethod.POST)
     public String createFolder(Model model, String pathStr, String folderName){
-        String _pathStr = UtilityClass.getBaseDirectory() + "\\" + springSecurityUtil.getLoginUserName()
-                + "\\" + pathStr + "\\" + folderName;
+        String _pathStr = UtilityClass.getUserDirectory(springSecurityUtil.getLoginUserName())
+                + "/" + pathStr + "/" + folderName;
 
         Path path = Paths.get(_pathStr);
 
@@ -82,36 +80,39 @@ public class FileController {
 
         return "filesList";
     }
-    /*@RequestMapping(value="delete", method = RequestMethod.POST)
-    public String delete(Model model, String pathStr, String name){
-        String _pathStr = UtilityClass.getBaseDirectory() + "\\" + springSecurityUtil.getLoginUserName()
-                + "\\" + pathStr + "\\" + name;
+
+    @RequestMapping(value="delete", method = RequestMethod.POST)
+    public @ResponseBody StatusObject delete(Model model, String pathStr, String name){
+        StatusObject object = new StatusObject();
+
+        String _pathStr = UtilityClass.getUserDirectory(springSecurityUtil.getLoginUserName())
+                + "/" + pathStr + "/" + name;
 
         Path path = Paths.get(_pathStr);
 
         try {
-            Files.delete(path);
-        } catch (IOException e) {
-            e.printStackTrace();
+            //path being delete is non empty directory
+            if(Files.isDirectory(path) && Files.newDirectoryStream(path).iterator().hasNext()){
+                object.setStatusCode(Constants.STATUS_CODE_ERROR);
+                object.setStatusText("Error! Cannot delete non-empty directory!");
+            }else{
+                Files.delete(path);
+
+                object.setStatusCode(Constants.STATUS_CODE_SUCCESS);
+                object.setStatusText("Delete successful");
+            }
+        } catch (IOException x) {
+            x.printStackTrace();
+            object.setStatusCode(Constants.STATUS_CODE_ERROR);
+            object.setStatusText(x.getMessage());
         }
-
-        List<String> files = new ArrayList<String>();
-        List<String> folders = new ArrayList<String>();
-
-        UtilityClass.loadFilesAndFolders(files, folders, _pathStr);
-
-        model.addAttribute("folders", folders);
-        model.addAttribute("files", files);
-
-        model.addAttribute("pathStr", pathStr);
-
-        return "filesList";
-    }*/
+        return object;
+    }
 
     @RequestMapping(value="fileListing", method = RequestMethod.POST)
     public String fileListing(Model model, String path){
 
-        String pathStr = UtilityClass.getBaseDirectory() + "\\" + springSecurityUtil.getLoginUserName() + "\\" + path;
+        String pathStr = UtilityClass.getUserDirectory(springSecurityUtil.getLoginUserName()) + "/" + path;
 
         List<String> files = new ArrayList<String>();
         List<String> folders = new ArrayList<String>();

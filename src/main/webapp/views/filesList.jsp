@@ -7,21 +7,8 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<c:forEach var="folderName" items="${folders}">
-  <div class="list folderList" id="${folderName}" ondblclick="openFolder('${folderName}');">
-    <img src="../images/folder.png"/><c:out value="${folderName}" />
-  </div>
-</c:forEach>
-
-<c:forEach var="fileName" items="${files}">
-  <div class="list fileList"  ondblclick="downloadFile('${fileName}');">
-    <img src="../images/file.png"/><c:out value="${fileName}" />
-  </div>
-</c:forEach>
+<jsp:include page="fileListing.jsp"/>
 
 <script>
   $("#pathStr").val('${pathStr}');
