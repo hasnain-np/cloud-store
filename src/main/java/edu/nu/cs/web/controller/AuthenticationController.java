@@ -10,9 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -62,6 +60,20 @@ public class AuthenticationController {
         UtilityClass.verifyUserDirectory(user.getUserName());
 
         return "redirect:../home";
+    }
+
+    @RequestMapping(value="/authenticate", method = RequestMethod.POST)
+    public @ResponseBody UserVO authenticateUser(String name, String password) {
+        UserVO user = new UserVO();
+        user.setUserName(name);
+        user.setPassword(UtilityClass.getMD5(password));
+
+        user = userService.findByUserNameAndPassword(user);
+
+        if(user!=null){
+            UtilityClass.verifyUserDirectory(user.getUserName());
+        }
+        return user;
     }
 
 }
