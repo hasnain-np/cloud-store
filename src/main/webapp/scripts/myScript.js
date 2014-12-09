@@ -25,6 +25,7 @@ function selectFile(){
 }
 
 function uploadFile(){
+    upFile = $("#upFile")[0];
     if(upFile.files.length==0) {
         $("#startUpBtn").show();
         $("#selFileBtn").hide();
@@ -38,6 +39,8 @@ function uploadFile(){
     formData .append("path", $("#pathStr").val());
     formData .append("file", upFile.files[0]);
 
+    console.log($("#pathStr").val());
+    console.log(upFile.files[0]);
 
     $.ajax({
         type: "POST",
