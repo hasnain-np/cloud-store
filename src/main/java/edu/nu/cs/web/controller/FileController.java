@@ -46,7 +46,7 @@ public class FileController {
         List<String> files = new ArrayList<String>();
         List<String> folders = new ArrayList<String>();
 
-        UtilityClass.loadFilesAndFolders(files, folders, UtilityClass.getBaseDirectory() + "/" + springSecurityUtil.getLoginUserName());
+        UtilityClass.loadFilesAndFolders(files, folders, UtilityClass.getBaseDirectory() + "/" + springSecurityUtil.getLoginUserName() + "/" + path);
 
         model.addAttribute("folders", folders);
         model.addAttribute("files", files);
@@ -82,6 +82,31 @@ public class FileController {
 
         return "filesList";
     }
+    /*@RequestMapping(value="delete", method = RequestMethod.POST)
+    public String delete(Model model, String pathStr, String name){
+        String _pathStr = UtilityClass.getBaseDirectory() + "\\" + springSecurityUtil.getLoginUserName()
+                + "\\" + pathStr + "\\" + name;
+
+        Path path = Paths.get(_pathStr);
+
+        try {
+            Files.delete(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<String> files = new ArrayList<String>();
+        List<String> folders = new ArrayList<String>();
+
+        UtilityClass.loadFilesAndFolders(files, folders, _pathStr);
+
+        model.addAttribute("folders", folders);
+        model.addAttribute("files", files);
+
+        model.addAttribute("pathStr", pathStr);
+
+        return "filesList";
+    }*/
 
     @RequestMapping(value="fileListing", method = RequestMethod.POST)
     public String fileListing(Model model, String path){

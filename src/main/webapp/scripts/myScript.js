@@ -35,7 +35,9 @@ function uploadFile(){
     $("#loadingGif").show();
 
     var formData  = new FormData();
+    formData .append("path", $("#pathStr").val());
     formData .append("file", upFile.files[0]);
+
 
     $.ajax({
         type: "POST",
