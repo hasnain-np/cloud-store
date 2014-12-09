@@ -62,12 +62,23 @@ public class AuthenticationController {
         return "redirect:../home";
     }
 
-    @RequestMapping(value="/authenticate", method = RequestMethod.POST)
+    /*@RequestMapping(value="/authenticate", method = RequestMethod.POST)
     public @ResponseBody UserVO authenticateUser(String name, String password) {
         UserVO user = new UserVO();
         user.setUserName(name);
         user.setPassword(UtilityClass.getMD5(password));
 
+        user = userService.findByUserNameAndPassword(user);
+
+        if(user!=null){
+            UtilityClass.verifyUserDirectory(user.getUserName());
+        }
+        return user;
+    }*/
+
+    @RequestMapping(value="/authenticate", method = RequestMethod.POST)
+     public @ResponseBody UserVO authenticateUser(@RequestBody UserVO user) {
+        user.setPassword(UtilityClass.getMD5(user.getPassword()));
         user = userService.findByUserNameAndPassword(user);
 
         if(user!=null){
