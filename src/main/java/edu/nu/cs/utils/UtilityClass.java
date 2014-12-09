@@ -41,11 +41,6 @@ public class UtilityClass {    /**
     }
 
 
-    public static String getBaseDirectory(){
-        return Constants.BASE_DIRECTORY + "/" + Constants.SOURCE_DIRECTORY;
-    }
-
-
     public static void verifyUserDirectory(String userName) {
         Path dir = Paths.get(getBaseDirectory() + "/" + userName);
 
@@ -56,6 +51,11 @@ public class UtilityClass {    /**
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public static String getBaseDirectory(){
+        return Constants.BASE_DIRECTORY + "/" + Constants.DESTINATION_DIRECTORY;
     }
 
     public static boolean isAjaxRequest(HttpServletRequest request) {
