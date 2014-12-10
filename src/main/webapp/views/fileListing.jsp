@@ -16,7 +16,7 @@
 </c:forEach>
 
 <c:forEach var="fileName" items="${files}">
-    <div class="list fileList"  ondblclick="downloadFile('${fileName}');" onclick="selectRow('${fileName}', this);">
+    <div class="list fileList"  ondblclick="downloadFile('${fileName}');" onclick="selectRow('${fileName}', this, true);">
         <img src="../images/file.png"/><c:out value="${fileName}" />
     </div>
 </c:forEach>

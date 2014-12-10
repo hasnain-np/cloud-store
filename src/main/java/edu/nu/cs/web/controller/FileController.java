@@ -91,7 +91,7 @@ public class FileController {
         List<String> files = new ArrayList<String>();
         List<String> folders = new ArrayList<String>();
 
-        UtilityClass.loadFilesAndFolders(files, folders, _pathStr);
+        UtilityClass.loadFilesAndFolders(files, folders, _pathStr.replace(folderName,""));
 
         model.addAttribute("folders", folders);
         model.addAttribute("files", files);
@@ -151,9 +151,9 @@ public class FileController {
     }
 
     @RequestMapping(value = "sharing", method = RequestMethod.POST)
-    public String sharing(Model model, @RequestParam(value = "path") String path) throws NoSuchAlgorithmException {
+    public @ResponseBody SharedFilesVO sharing(Model model, String path) throws NoSuchAlgorithmException {
 
-        String pathStr = springSecurityUtil.getLoginUserName() + "\\" + path;
+        String pathStr = springSecurityUtil.getLoginUserName() + "/" + path;
 
         List<String> files = new ArrayList<String>();
         List<String> folders = new ArrayList<String>();
@@ -177,6 +177,6 @@ public class FileController {
 
         sharedFilesService.save(sharedFilesVO);
 
-        return "filesList";
+        return sharedFilesVO;
     }
 }

@@ -24,6 +24,8 @@
     <button class="greenBtn" id="selFileBtn" onclick="selectFile();">Upload File</button>
     <button class="greenBtn" id="startUpBtn" onclick="uploadFile();">Start Uploading</button>
     <button class="greenBtn" id="deleteBtn" onclick="deleteFile();">Delete</button>
+    <button class="greenBtn" id="backBtn" onclick="goBack();">Back</button>
+    <button class="greenBtn" id="shareLinkBtn" onclick="getDownloadLink();">Share download link</button>
 
     <img src="../images/loading.gif" id="loadingGif"/>
 
@@ -31,15 +33,18 @@
       <div  style='height: 0px;width:0px; overflow:hidden;'><input id="upFile" type="file" name="file" /></div>
       <form:errors path="file" cssStyle="color: #ff0000;" />
     </form:form>
-    <br/><br/>
+    <br/>
     <span id="createFolderSpan">
-      Folder Name: <input id="folderName" type="text" name="folderName" />
+      Folder Name: <input id="folderName" type="text" name="folderName" style="height: 27px;"/>
       <button class="greenBtn" onclick="createFolder();" id="saveDirBtn">Save Folder</button>
     </span>
     <input type="hidden" id="pathStr" value=""/>
 
     <input type="hidden" id="selectedRowName" value=""/>
+
   </div>
+
+<div id="downloadLink" style="display:none;">Download link: </div>
 
 <%--
   <form:form method="POST" commandName="file" action="file"	enctype="multipart/form-data">

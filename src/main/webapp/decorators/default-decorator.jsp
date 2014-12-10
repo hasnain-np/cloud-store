@@ -15,9 +15,9 @@
 
         <br/>
 
-
-        <sitemesh:write property='body'/>
-
+        <div id="bodyContainer">
+            <sitemesh:write property='body'/>
+        </div>
         <br/><br/><br/>
 
         <jsp:include page="/views/templates/footer.jsp"></jsp:include>

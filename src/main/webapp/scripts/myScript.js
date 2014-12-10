@@ -3,6 +3,7 @@
  */
 
 var rowDiv=null;
+var selectedFileName;
 $(function() {
     $('.list').click(function() {
         $(this).addClass('listActive').siblings().removeClass('listActive');
@@ -124,7 +125,9 @@ function downloadFile(_fileName){
 }
 
 
-function selectRow(rowVal, rowObj){
+function selectRow(rowVal, rowObj, isFile){
+    //selected row is file
+    selectedFileName = isFile ? rowVal : null;
     rowDiv = rowObj;
     $("#selectedRowName").val(rowVal);
 }
@@ -158,3 +161,69 @@ function deleteFile(){
         //dataType: dataType
     });
 }
+
+function goBack(){
+    var _pathStr = "/" + $("#pathStr").val();
+
+    if(_pathStr.indexOf("/")>=0){
+        _pathStr = _pathStr.substr(0, _pathStr.lastIndexOf("/"));
+    }
+
+    if(_pathStr.replace("/").replace("\\").trim().length == 0 ){
+        return false;
+    }
+
+
+    $("#loadingGif").show();
+
+    $.ajax({
+        type: "POST",
+        url: "ajax/fileListing",
+        data: { path: _pathStr},
+        success: function(resp){
+            $("#listingContainer").html(resp);
+            $("#loadingGif").hide();
+            //alert("Success!");
+        },error: function(resp){
+            alert("Error!");
+        }
+        //dataType: dataType
+    });
+}
+
+
+function getDownloadLink(){
+    if(!selectedFileName){
+        return false;
+    }
+    _pathStr= $("#pathStr").val() + "/" + selectedFileName;
+    $("#loadingGif").show();
+
+    $.ajax({
+        type: "POST",
+        url: "ajax/sharing",
+        data: { path: _pathStr},
+        success: function(resp){
+            if(resp && resp.hash){
+                shareUrl = "http://" + getHostName() + "/sharing/dl/" + resp.hash;
+                $("#downloadLink").append("<a href='" + shareUrl + "'> " + shareUrl + " <//a>");
+                $("#downloadLink").show();
+            }
+            $("#loadingGif").hide();
+            $("#startUpBtn").hide();
+            $("#selFileBtn").show();
+            //alert("Success!");
+        },error: function(resp){
+        }
+        //dataType: dataType
+    });
+}
+
+
+/*******Start of util functions************/
+
+function getHostName() {
+    return window.location.host;
+}
+
+/*******End of util functions************/
