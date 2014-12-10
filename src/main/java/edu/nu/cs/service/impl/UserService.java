@@ -28,6 +28,13 @@ public class UserService implements IUserService {
         return (UserVO) UserAssembler.getInstance().convertToValueObject(user);
     }
 
+    @Override
+    public UserVO findByUsername(UserVO userVO) {
+        User user = userRepository.findByUserName(userVO.getUserName());
+
+        return (UserVO) UserAssembler.getInstance().convertToValueObject(user);
+    }
+
     @Transactional
     public UserVO save(UserVO user){
         User entity = (User) UserAssembler.getInstance().convertToEntityBean(user);
