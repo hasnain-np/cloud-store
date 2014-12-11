@@ -32,10 +32,19 @@ public class FileDownloadUtil {
         /* Check if the file exists and the time current time is < expiry time */
         if (f.exists() && !isExpired) {
             String contentType = URLConnection.guessContentTypeFromName(f.getName());
-            res.setContentType(contentType);
+            /*if(contentType!=null)
+                res.setContentType(contentType);
+
             res.setContentLength(new Long(f.length()).intValue());
             res.setHeader("Content-Disposition", "attachment; " + f.getName());
+            FileCopyUtils.copy(new FileInputStream(f), res.getOutputStream());*/
+
+
+            // set file as attached data and copy file data to response output stream
+            res.setHeader("Content-Disposition", "attachment; filename=\"" + f.getName() );
             FileCopyUtils.copy(new FileInputStream(f), res.getOutputStream());
+            // close stream and return to view
+            res.flushBuffer();
         } else {
             res.sendError(500, "File not found");
         }
