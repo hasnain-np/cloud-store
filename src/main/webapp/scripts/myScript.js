@@ -163,11 +163,12 @@ function deleteFile(){
 }
 
 function goBack(){
-    var _pathStr = "/" + $("#pathStr").val();
+    var _pathStr = $("#pathStr").val();
 
     if(_pathStr.indexOf("/")>=0){
         _pathStr = _pathStr.substr(0, _pathStr.lastIndexOf("/"));
     }
+    _pathStr = "/" + _pathStr;
 
     if(_pathStr.replace("/").replace("\\").trim().length == 0 ){
         return false;
@@ -218,7 +219,6 @@ function getDownloadLink(){
         //dataType: dataType
     });
 }
-
 
 /*******Start of util functions************/
 

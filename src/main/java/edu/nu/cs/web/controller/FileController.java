@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.security.MessageDigest;
@@ -96,7 +97,7 @@ public class FileController {
         model.addAttribute("folders", folders);
         model.addAttribute("files", files);
 
-        model.addAttribute("pathStr", pathStr + "/" + folderName);
+        model.addAttribute("pathStr", pathStr);
 
         return "filesList";
     }
@@ -114,7 +115,7 @@ public class FileController {
 
         try {
             //path being delete is non empty directory
-            if (Files.isDirectory(path) && Files.newDirectoryStream(path).iterator().hasNext()) {
+            if (Files.isDirectory(path) && (new File(_pathStr).list().length) >0) {
                 object.setStatusCode(Constants.STATUS_CODE_ERROR);
                 object.setStatusText("Error! Cannot delete non-empty directory!");
             } else {
