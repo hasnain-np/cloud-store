@@ -11,4 +11,12 @@
 <sec:authorize access="isAuthenticated()">
 </sec:authorize>
 
-<p>Footer</p>
+<div class="row">
+    <footer>
+        <div class="col-md-12">
+            <div class="col-md-1 pull-right">
+                <img src="http://3.bp.blogspot.com/-IXUidTVie5o/Tlj4IcxHnYI/AAAAAAAAAB4/BRl41uyY9_s/s1600/fast.png"/>
+            </div>
+        </div>
+    </footer>
+</div>

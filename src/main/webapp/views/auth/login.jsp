@@ -10,34 +10,26 @@
 <c:url value="/secure/login" var="loginUrl"/>
 <c:url value="/secure/register" var="registerUrl"/>
 
-<br/><br/>
-<div id="loginForm">
-  <form action="${loginUrl}" method="post">
-    <c:if test="${param.error != null}">
-      <p>
-        Invalid username and password.
-      </p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-      <p>
-        You have been logged out.
-      </p>
-    </c:if>
-    <p>
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username"/>
-    </p>
-    <p>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password"/>
-    </p>
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
-    <button type="submit" class="btn">Log in</button>
-  </form>
+<div class="col-md-4 col-md-offset-4 well">
+    <form class="form-horizontal" role="form" action="${loginUrl}" method="post">
+        <div class="form-group">
+            <label for="username" class="col-sm-4 control-label">Username</label>
 
-  <br/><br/>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-4 control-label">Password</label>
 
-  <p>Not registered? <a href="${registerUrl}">Click here</a> to get a new account</p>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
 </div>
